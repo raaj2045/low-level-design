@@ -59,29 +59,19 @@ class ObserverConcreteClass implements Observer {
     }
 }
 
-class WeatherStation extends ObservableConcreteClass {
-    public WeatherStation() {
-        super();
-    }
-}
 
-class TVDisplayObserver extends ObserverConcreteClass {
-    public TVDisplayObserver(ObservableConcreteClass observable) {
-        super(observable);
-    }
-}
-
-class MobileDisplayObserver extends ObserverConcreteClass {
-    public MobileDisplayObserver(ObservableConcreteClass observable) {
-        super(observable);
-    }
-}
 
 class Main {
     public static void main(String[] args) {
-        WeatherStation weatherStation = new WeatherStation();
-        weatherStation.addObserver(new TVDisplayObserver(weatherStation));
-        weatherStation.addObserver(new MobileDisplayObserver(weatherStation));
+        ObservableConcreteClass weatherStation = new ObservableConcreteClass();
+
+        ObserverConcreteClass tvDisplayObserver = new ObserverConcreteClass(weatherStation);
+        ObserverConcreteClass mobileDisplayObserver = new ObserverConcreteClass(weatherStation);
+
+        weatherStation.addObserver(tvDisplayObserver);
+        weatherStation.addObserver(mobileDisplayObserver);
         weatherStation.setData(10);
+        weatherStation.removeObserver(tvDisplayObserver);
+        weatherStation.setData(20);
     }
 }
